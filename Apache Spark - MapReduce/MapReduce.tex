@@ -1,0 +1,1298 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    \usepackage{mathrsfs}
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+    \definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+    \definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatibility definitions
+    \def\gt{>}
+    \def\lt{<}
+    \let\Oldtex\TeX
+    \let\Oldlatex\LaTeX
+    \renewcommand{\TeX}{\textrm{\Oldtex}}
+    \renewcommand{\LaTeX}{\textrm{\Oldlatex}}
+    % Document parameters
+    % Document title
+    \title{Exercise\_8}
+    
+    
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{raaghav-radhakrishnan---246097}{%
+\subsection{Raaghav Radhakrishnan -
+246097}\label{raaghav-radhakrishnan---246097}}
+
+    \hypertarget{exercise-1---part-a}{%
+\subsubsection{Exercise 1 - Part (a)}\label{exercise-1---part-a}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{c+c1}{\PYZsh{}import libraries}
+        \PY{k+kn}{from} \PY{n+nn}{pyspark} \PY{k}{import} \PY{n}{SparkContext}
+        \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql} \PY{k}{import} \PY{n}{SQLContext}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql} \PY{k}{import} \PY{n}{Row}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{n}{sc} \PY{o}{=} \PY{n}{SparkContext}\PY{p}{(}\PY{p}{)}
+        \PY{n}{sqlContext} \PY{o}{=} \PY{n}{SQLContext}\PY{p}{(}\PY{n}{sc}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{c+c1}{\PYZsh{}List of words}
+        \PY{n}{a} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{spark}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{rdd}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{python}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{context}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{create}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{class}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+        \PY{n}{b} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{operation}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{apache}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{scala}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lambda}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{parallel}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{partition}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{}Making RDDs}
+        \PY{n}{rdd\PYZus{}A} \PY{o}{=} \PY{n}{sc}\PY{o}{.}\PY{n}{parallelize}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+        \PY{n}{rdd\PYZus{}B}\PY{o}{=} \PY{n}{sc}\PY{o}{.}\PY{n}{parallelize}\PY{p}{(}\PY{n}{b}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}Mapping the names of RDD}
+        \PY{n}{A} \PY{o}{=} \PY{n}{rdd\PYZus{}A}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{Row}\PY{p}{(}\PY{n}{name} \PY{o}{=} \PY{n}{x}\PY{p}{)}\PY{p}{)}
+        \PY{n}{B} \PY{o}{=} \PY{n}{rdd\PYZus{}B}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{Row}\PY{p}{(}\PY{n}{name} \PY{o}{=} \PY{n}{x}\PY{p}{)}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}Creating dataframe from RDD}
+        \PY{n}{dfA} \PY{o}{=} \PY{n}{sqlContext}\PY{o}{.}\PY{n}{createDataFrame}\PY{p}{(}\PY{n}{A}\PY{p}{)}
+        \PY{n}{dfB} \PY{o}{=} \PY{n}{sqlContext}\PY{o}{.}\PY{n}{createDataFrame}\PY{p}{(}\PY{n}{B}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}Creating Alias}
+        \PY{n}{df1} \PY{o}{=} \PY{n}{dfA}\PY{o}{.}\PY{n}{alias}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{df1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{df2} \PY{o}{=} \PY{n}{dfB}\PY{o}{.}\PY{n}{alias}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{df2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \hypertarget{right-outer-join}{%
+\subsubsection{Right outer join:}\label{right-outer-join}}
+
+A RIGHT OUTER JOIN is one of the JOIN operations that allow you to
+specify a JOIN clause. It preserves the unmatched rows from the second
+(right) table, joining them with a NULL in the shape of the first (left)
+table.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{c+c1}{\PYZsh{}Right Outer Join}
+         \PY{n}{right\PYZus{}outer} \PY{o}{=} \PY{n}{df1}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{other}\PY{o}{=}\PY{n}{df2}\PY{p}{,}\PY{n}{on}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{name}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{how}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{right\PYZus{}outer}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Right Outer Join:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{right\PYZus{}outer}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Right Outer Join:
++---------+
+|     name|
++---------+
+|operation|
+|   lambda|
+|partition|
+| parallel|
+|    scala|
+|   apache|
++---------+
+
+
+    \end{Verbatim}
+
+    \hypertarget{full-outer-join}{%
+\subsubsection{Full outer join:}\label{full-outer-join}}
+
+A FULL OUTER JOIN combines the results of both left and right outer
+joins and returns all (matched or unmatched) rows from the tables on
+both sides of the join clause
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{c+c1}{\PYZsh{}Full Outer Join}
+         \PY{n}{full\PYZus{}outer} \PY{o}{=} \PY{n}{df1}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{other}\PY{o}{=}\PY{n}{df2}\PY{p}{,}\PY{n}{on}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{name}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{how}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{full\PYZus{}outer}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Full Outer Join:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{full\PYZus{}outer}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Full Outer Join:
++---------+
+|     name|
++---------+
+|operation|
+|   lambda|
+|  context|
+|partition|
+|   create|
+|      rdd|
+| parallel|
+|    scala|
+|   apache|
+|    spark|
+|    class|
+|   python|
++---------+
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{c+c1}{\PYZsh{}Mapping the RDD}
+         \PY{n}{map\PYZus{}rdd} \PY{o}{=} \PY{n}{full\PYZus{}outer}\PY{o}{.}\PY{n}{rdd}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n+nb}{sum}\PY{p}{(}\PY{p}{[}\PY{n}{word}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{for} \PY{n}{word} \PY{o+ow}{in} \PY{n}{x}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{map\PYZus{}df} \PY{o}{=} \PY{n}{map\PYZus{}rdd}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{Row}\PY{p}{(}\PY{n}{name} \PY{o}{=} \PY{n}{x}\PY{p}{)}\PY{p}{)}
+         \PY{n}{map\PYZus{}df} \PY{o}{=} \PY{n}{sqlContext}\PY{o}{.}\PY{n}{createDataFrame}\PY{p}{(}\PY{n}{map\PYZus{}df}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Mapped Dataframe with count of }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{s}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{map\PYZus{}df}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}Reducing the RDD}
+         \PY{n}{reduce\PYZus{}rdd}\PY{o}{=}\PY{n}{map\PYZus{}rdd}\PY{o}{.}\PY{n}{reduce}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{:} \PY{n}{x}\PY{o}{+}\PY{n}{y}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Using Map\PYZhy{}Reduce, the character }\PY{l+s+se}{\PYZbs{}\PYZdq{}}\PY{l+s+s2}{s}\PY{l+s+se}{\PYZbs{}\PYZdq{}}\PY{l+s+s2}{ appears}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{reduce\PYZus{}rdd}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{times in all }
+                                                                           \PY{n}{a} \PY{o+ow}{and} \PY{n}{b}\PY{o}{.}\PYZbs{}\PY{n}{n}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ )}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Mapped Dataframe with count of 's'
++----+
+|name|
++----+
+|   0|
+|   0|
+|   0|
+|   0|
+|   0|
+|   0|
+|   0|
+|   1|
+|   0|
+|   1|
+|   2|
+|   0|
++----+
+
+Using Map-Reduce, the character "s" appears 4 times in all a and b.
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{c+c1}{\PYZsh{}Aggregate function}
+         \PY{n}{count} \PY{o}{=} \PY{n}{full\PYZus{}outer}\PY{o}{.}\PY{n}{rdd}\PY{o}{.}\PY{n}{aggregate}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{k}{lambda} \PY{n}{i}\PY{p}{,} \PY{n}{x}\PY{p}{:} \PY{n}{i} \PY{o}{+} \PY{n}{x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} 
+                                          \PY{k}{lambda} \PY{n}{i}\PY{p}{,} \PY{n}{j}\PY{p}{:} \PY{n}{i}\PY{o}{+}\PY{n}{j}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Using aggregate function, the character }\PY{l+s+se}{\PYZbs{}\PYZdq{}}\PY{l+s+s2}{s}\PY{l+s+se}{\PYZbs{}\PYZdq{}}\PY{l+s+s2}{ appears}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{count}\PY{p}{,}
+               \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{times in all a and b.}\PY{l+s+s2}{\PYZdq{}} \PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Using aggregate function, the character "s" appears 4 times in all a and b.
+
+    \end{Verbatim}
+
+    \hypertarget{section}{%
+\subsubsection{}\label{section}}
+
+    \#\#\#
+
+    \hypertarget{exercise-1---part-b}{%
+\subsubsection{Exercise 1 - Part (b)}\label{exercise-1---part-b}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{json\PYZus{}file} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gdrive/My Drive/DDA/Spark1/students.json}\PY{l+s+s2}{\PYZdq{}}
+         \PY{n}{df} \PY{o}{=} \PY{n}{sqlContext}\PY{o}{.}\PY{n}{read}\PY{o}{.}\PY{n}{json}\PY{p}{(}\PY{n}{json\PYZus{}file}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Students records: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Students records: 
+
++------------------+------------------+----------+---------+------+----+
+|            course|               dob|first\_name|last\_name|points|s\_id|
++------------------+------------------+----------+---------+------+----+
+|Humanities and Art|  October 14, 1983|      Alan|      Joe|    10|   1|
+|  Computer Science|September 26, 1980|    Martin|  Genberg|    17|   2|
+|    Graphic Design|     June 12, 1982|     Athur|   Watson|    16|   3|
+|    Graphic Design|     April 5, 1987|  Anabelle|  Sanberg|    12|   4|
+|        Psychology|  November 1, 1978|      Kira| Schommer|    11|   5|
+|          Business|  17 February 1981| Christian|   Kiriam|    10|   6|
+|  Machine Learning|    1 January 1984|   Barbara|  Ballard|    14|   7|
+|     Deep Learning|  January 13, 1978|      John|     null|    10|   8|
+|  Machine Learning|  26 December 1989|    Marcus|   Carson|    15|   9|
+|           Physics|  30 December 1987|     Marta|   Brooks|    11|  10|
+|    Data Analytics|     June 12, 1975|     Holly| Schwartz|    12|  11|
+|  Computer Science|      July 2, 1985|     April|    Black|  null|  12|
+|  Computer Science|     July 22, 1980|     Irene|  Bradley|    13|  13|
+|        Psychology|   7 February 1986|      Mark|    Weber|    12|  14|
+|       Informatics|      May 18, 1987|     Rosie|   Norman|     9|  15|
+|          Business|   August 10, 1984|    Martin|   Steele|     7|  16|
+|  Machine Learning|  16 December 1990|     Colin| Martinez|     9|  17|
+|    Data Analytics|              null|   Bridget|    Twain|     6|  18|
+|          Business|      7 March 1980|   Darlene|    Mills|    19|  19|
+|    Data Analytics|      June 2, 1985|   Zachary|     null|    10|  20|
++------------------+------------------+----------+---------+------+----+
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql}\PY{n+nn}{.}\PY{n+nn}{functions} \PY{k}{import} \PY{n}{mean}\PY{p}{,}\PY{n}{col}
+         \PY{n}{avg} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{select}\PY{p}{(}\PY{n}{mean}\PY{p}{(}\PY{n}{col}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{points}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{alias}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{collect}\PY{p}{(}\PY{p}{)}
+         \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{na}\PY{o}{.}\PY{n}{fill}\PY{p}{(}\PY{n}{avg}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Replacing the null values in column points by mean of all points: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Replacing the null values in column points by mean of all points: 
+
++------------------+------------------+----------+---------+------+----+
+|            course|               dob|first\_name|last\_name|points|s\_id|
++------------------+------------------+----------+---------+------+----+
+|Humanities and Art|  October 14, 1983|      Alan|      Joe|    10|   1|
+|  Computer Science|September 26, 1980|    Martin|  Genberg|    17|   2|
+|    Graphic Design|     June 12, 1982|     Athur|   Watson|    16|   3|
+|    Graphic Design|     April 5, 1987|  Anabelle|  Sanberg|    12|   4|
+|        Psychology|  November 1, 1978|      Kira| Schommer|    11|   5|
+|          Business|  17 February 1981| Christian|   Kiriam|    10|   6|
+|  Machine Learning|    1 January 1984|   Barbara|  Ballard|    14|   7|
+|     Deep Learning|  January 13, 1978|      John|     null|    10|   8|
+|  Machine Learning|  26 December 1989|    Marcus|   Carson|    15|   9|
+|           Physics|  30 December 1987|     Marta|   Brooks|    11|  10|
+|    Data Analytics|     June 12, 1975|     Holly| Schwartz|    12|  11|
+|  Computer Science|      July 2, 1985|     April|    Black|    11|  12|
+|  Computer Science|     July 22, 1980|     Irene|  Bradley|    13|  13|
+|        Psychology|   7 February 1986|      Mark|    Weber|    12|  14|
+|       Informatics|      May 18, 1987|     Rosie|   Norman|     9|  15|
+|          Business|   August 10, 1984|    Martin|   Steele|     7|  16|
+|  Machine Learning|  16 December 1990|     Colin| Martinez|     9|  17|
+|    Data Analytics|              null|   Bridget|    Twain|     6|  18|
+|          Business|      7 March 1980|   Darlene|    Mills|    19|  19|
+|    Data Analytics|      June 2, 1985|   Zachary|     null|    10|  20|
++------------------+------------------+----------+---------+------+----+
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{na}\PY{o}{.}\PY{n}{fill}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dob}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{unknown}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{last\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Replacing values in column dob and last\PYZus{}name by }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{unknown}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ and }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{\PYZhy{}\PYZhy{}}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Replacing values in column dob and last\_name by 'unknown' and '--': 
+
++------------------+------------------+----------+---------+------+----+
+|            course|               dob|first\_name|last\_name|points|s\_id|
++------------------+------------------+----------+---------+------+----+
+|Humanities and Art|  October 14, 1983|      Alan|      Joe|    10|   1|
+|  Computer Science|September 26, 1980|    Martin|  Genberg|    17|   2|
+|    Graphic Design|     June 12, 1982|     Athur|   Watson|    16|   3|
+|    Graphic Design|     April 5, 1987|  Anabelle|  Sanberg|    12|   4|
+|        Psychology|  November 1, 1978|      Kira| Schommer|    11|   5|
+|          Business|  17 February 1981| Christian|   Kiriam|    10|   6|
+|  Machine Learning|    1 January 1984|   Barbara|  Ballard|    14|   7|
+|     Deep Learning|  January 13, 1978|      John|       --|    10|   8|
+|  Machine Learning|  26 December 1989|    Marcus|   Carson|    15|   9|
+|           Physics|  30 December 1987|     Marta|   Brooks|    11|  10|
+|    Data Analytics|     June 12, 1975|     Holly| Schwartz|    12|  11|
+|  Computer Science|      July 2, 1985|     April|    Black|    11|  12|
+|  Computer Science|     July 22, 1980|     Irene|  Bradley|    13|  13|
+|        Psychology|   7 February 1986|      Mark|    Weber|    12|  14|
+|       Informatics|      May 18, 1987|     Rosie|   Norman|     9|  15|
+|          Business|   August 10, 1984|    Martin|   Steele|     7|  16|
+|  Machine Learning|  16 December 1990|     Colin| Martinez|     9|  17|
+|    Data Analytics|           unknown|   Bridget|    Twain|     6|  18|
+|          Business|      7 March 1980|   Darlene|    Mills|    19|  19|
+|    Data Analytics|      June 2, 1985|   Zachary|       --|    10|  20|
++------------------+------------------+----------+---------+------+----+
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql}\PY{n+nn}{.}\PY{n+nn}{functions} \PY{k}{import} \PY{n}{mean}\PY{p}{,}\PY{n}{col}
+        \PY{n}{avg} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{select}\PY{p}{(}\PY{n}{mean}\PY{p}{(}\PY{n}{col}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{points}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{alias}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{collect}\PY{p}{(}\PY{p}{)}
+        \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{na}\PY{o}{.}\PY{n}{fill}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dob}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{January 20, 1995}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{last\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{k+kn}{from} \PY{n+nn}{dateutil} \PY{k}{import} \PY{n}{parser}
+         \PY{k+kn}{import} \PY{n+nn}{datetime}
+         \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql}\PY{n+nn}{.}\PY{n+nn}{types} \PY{k}{import} \PY{n}{TimestampType}\PY{p}{,}\PY{n}{DateType}
+         \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql}\PY{n+nn}{.}\PY{n+nn}{functions} \PY{k}{import} \PY{n}{UserDefinedFunction}\PY{p}{,}\PY{n}{col}\PY{p}{,}\PY{n}{date\PYZus{}format}
+         \PY{n}{udf} \PY{o}{=} \PY{n}{UserDefinedFunction}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:}\PY{n}{parser}\PY{o}{.}\PY{n}{parse}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{TimestampType}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ts\PYZus{}df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dob\PYZus{}timestamp}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{udf}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{dob}\PY{p}{)}\PY{p}{)}
+         \PY{n}{func} \PY{o}{=} \PY{n}{UserDefinedFunction}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{datetime}\PY{o}{.}\PY{n}{datetime}
+                                    \PY{o}{.}\PY{n}{strptime}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{Y\PYZhy{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{m\PYZhy{}}\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{H:}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{M:}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{S}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{,} 
+                                    \PY{n}{TimestampType}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{df\PYZus{}upd} \PY{o}{=} \PY{n}{ts\PYZus{}df}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dob}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{date\PYZus{}format}\PY{p}{(}\PY{n}{func}\PY{p}{(}\PY{n}{col}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dob\PYZus{}timestamp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{,} 
+                                                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dd\PYZhy{}MM\PYZhy{}yyyy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{dd} \PY{o}{=} \PY{n}{df\PYZus{}upd}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dob\PYZus{}timestamp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Dates changed to }\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{DD\PYZhy{}MM\PYZhy{}YYYY}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ format: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{dd}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Dates changed to 'DD-MM-YYYY' format: 
+
++------------------+----------+----------+---------+------+----+
+|            course|       dob|first\_name|last\_name|points|s\_id|
++------------------+----------+----------+---------+------+----+
+|Humanities and Art|14-10-1983|      Alan|      Joe|    10|   1|
+|  Computer Science|26-09-1980|    Martin|  Genberg|    17|   2|
+|    Graphic Design|12-06-1982|     Athur|   Watson|    16|   3|
+|    Graphic Design|05-04-1987|  Anabelle|  Sanberg|    12|   4|
+|        Psychology|01-11-1978|      Kira| Schommer|    11|   5|
+|          Business|17-02-1981| Christian|   Kiriam|    10|   6|
+|  Machine Learning|01-01-1984|   Barbara|  Ballard|    14|   7|
+|     Deep Learning|13-01-1978|      John|       --|    10|   8|
+|  Machine Learning|26-12-1989|    Marcus|   Carson|    15|   9|
+|           Physics|30-12-1987|     Marta|   Brooks|    11|  10|
+|    Data Analytics|12-06-1975|     Holly| Schwartz|    12|  11|
+|  Computer Science|02-07-1985|     April|    Black|    11|  12|
+|  Computer Science|22-07-1980|     Irene|  Bradley|    13|  13|
+|        Psychology|07-02-1986|      Mark|    Weber|    12|  14|
+|       Informatics|18-05-1987|     Rosie|   Norman|     9|  15|
+|          Business|10-08-1984|    Martin|   Steele|     7|  16|
+|  Machine Learning|16-12-1990|     Colin| Martinez|     9|  17|
+|    Data Analytics|20-01-1995|   Bridget|    Twain|     6|  18|
+|          Business|07-03-1980|   Darlene|    Mills|    19|  19|
+|    Data Analytics|02-06-1985|   Zachary|       --|    10|  20|
++------------------+----------+----------+---------+------+----+
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql}\PY{n+nn}{.}\PY{n+nn}{functions} \PY{k}{import} \PY{n}{lit}\PY{p}{,}\PY{n}{year}
+         \PY{n}{df\PYZus{}upd} \PY{o}{=} \PY{n}{df\PYZus{}upd}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{2019} \PY{o}{\PYZhy{}} \PY{n}{year}\PY{p}{(}\PY{n}{col}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dob\PYZus{}timestamp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n}{df\PYZus{}upd} \PY{o}{=} \PY{n}{df\PYZus{}upd}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dob\PYZus{}timestamp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Updated records with the current age of students: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df\PYZus{}upd}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Updated records with the current age of students: 
+
++------------------+----------+----------+---------+------+----+---+
+|            course|       dob|first\_name|last\_name|points|s\_id|age|
++------------------+----------+----------+---------+------+----+---+
+|Humanities and Art|14-10-1983|      Alan|      Joe|    10|   1| 36|
+|  Computer Science|26-09-1980|    Martin|  Genberg|    17|   2| 39|
+|    Graphic Design|12-06-1982|     Athur|   Watson|    16|   3| 37|
+|    Graphic Design|05-04-1987|  Anabelle|  Sanberg|    12|   4| 32|
+|        Psychology|01-11-1978|      Kira| Schommer|    11|   5| 41|
+|          Business|17-02-1981| Christian|   Kiriam|    10|   6| 38|
+|  Machine Learning|01-01-1984|   Barbara|  Ballard|    14|   7| 35|
+|     Deep Learning|13-01-1978|      John|       --|    10|   8| 41|
+|  Machine Learning|26-12-1989|    Marcus|   Carson|    15|   9| 30|
+|           Physics|30-12-1987|     Marta|   Brooks|    11|  10| 32|
+|    Data Analytics|12-06-1975|     Holly| Schwartz|    12|  11| 44|
+|  Computer Science|02-07-1985|     April|    Black|    11|  12| 34|
+|  Computer Science|22-07-1980|     Irene|  Bradley|    13|  13| 39|
+|        Psychology|07-02-1986|      Mark|    Weber|    12|  14| 33|
+|       Informatics|18-05-1987|     Rosie|   Norman|     9|  15| 32|
+|          Business|10-08-1984|    Martin|   Steele|     7|  16| 35|
+|  Machine Learning|16-12-1990|     Colin| Martinez|     9|  17| 29|
+|    Data Analytics|20-01-1995|   Bridget|    Twain|     6|  18| 24|
+|          Business|07-03-1980|   Darlene|    Mills|    19|  19| 39|
+|    Data Analytics|02-06-1985|   Zachary|       --|    10|  20| 34|
++------------------+----------+----------+---------+------+----+---+
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql}\PY{n+nn}{.}\PY{n+nn}{functions} \PY{k}{import} \PY{n}{stddev} \PY{k}{as} \PY{n}{std}
+         \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql}\PY{n+nn}{.}\PY{n+nn}{functions} \PY{k}{import} \PY{n}{when}
+         \PY{n}{sd} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{select}\PY{p}{(}\PY{n}{std}\PY{p}{(}\PY{n}{col}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{points}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{alias}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{std}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{collect}\PY{p}{(}\PY{p}{)}
+         \PY{n}{sd} \PY{o}{=} \PY{n}{sd}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{std}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{df\PYZus{}pnt} \PY{o}{=} \PY{n}{df\PYZus{}upd}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{points}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{when}\PY{p}{(}\PY{n}{df\PYZus{}upd}\PY{o}{.}\PY{n}{points} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{sd}\PY{o}{+}\PY{n}{avg}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{)}
+                                    \PY{o}{.}\PY{n}{otherwise}\PY{p}{(}\PY{n}{df\PYZus{}upd}\PY{o}{.}\PY{n}{points}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Updated points using one standard deviation: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df\PYZus{}pnt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Updated points using one standard deviation: 
+
++------------------+----------+----------+---------+------+----+---+
+|            course|       dob|first\_name|last\_name|points|s\_id|age|
++------------------+----------+----------+---------+------+----+---+
+|Humanities and Art|14-10-1983|      Alan|      Joe|    10|   1| 36|
+|  Computer Science|26-09-1980|    Martin|  Genberg|    20|   2| 39|
+|    Graphic Design|12-06-1982|     Athur|   Watson|    20|   3| 37|
+|    Graphic Design|05-04-1987|  Anabelle|  Sanberg|    12|   4| 32|
+|        Psychology|01-11-1978|      Kira| Schommer|    11|   5| 41|
+|          Business|17-02-1981| Christian|   Kiriam|    10|   6| 38|
+|  Machine Learning|01-01-1984|   Barbara|  Ballard|    14|   7| 35|
+|     Deep Learning|13-01-1978|      John|       --|    10|   8| 41|
+|  Machine Learning|26-12-1989|    Marcus|   Carson|    20|   9| 30|
+|           Physics|30-12-1987|     Marta|   Brooks|    11|  10| 32|
+|    Data Analytics|12-06-1975|     Holly| Schwartz|    12|  11| 44|
+|  Computer Science|02-07-1985|     April|    Black|    11|  12| 34|
+|  Computer Science|22-07-1980|     Irene|  Bradley|    13|  13| 39|
+|        Psychology|07-02-1986|      Mark|    Weber|    12|  14| 33|
+|       Informatics|18-05-1987|     Rosie|   Norman|     9|  15| 32|
+|          Business|10-08-1984|    Martin|   Steele|     7|  16| 35|
+|  Machine Learning|16-12-1990|     Colin| Martinez|     9|  17| 29|
+|    Data Analytics|20-01-1995|   Bridget|    Twain|     6|  18| 24|
+|          Business|07-03-1980|   Darlene|    Mills|    20|  19| 39|
+|    Data Analytics|02-06-1985|   Zachary|       --|    10|  20| 34|
++------------------+----------+----------+---------+------+----+---+
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{n}{pt} \PY{o}{=} \PY{n}{df\PYZus{}pnt}\PY{o}{.}\PY{n}{toPandas}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{points}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Histogram of new points: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{pt}\PY{p}{,}\PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Histogram of new points: 
+
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_21_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{section}{%
+\subsubsection{}\label{section}}
+
+    \hypertarget{section}{%
+\subsubsection{}\label{section}}
+
+    \hypertarget{exercise-2}{%
+\subsubsection{Exercise 2}\label{exercise-2}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{c+c1}{\PYZsh{}import libraries}
+        \PY{k+kn}{from} \PY{n+nn}{pyspark} \PY{k}{import} \PY{n}{SparkContext}
+        \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql} \PY{k}{import} \PY{n}{SQLContext}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql} \PY{k}{import} \PY{n}{Row}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql}\PY{n+nn}{.}\PY{n+nn}{functions} \PY{k}{import} \PY{o}{*}
+        \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql}\PY{n+nn}{.}\PY{n+nn}{types} \PY{k}{import} \PY{n}{IntegerType}
+        \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql} \PY{k}{import} \PY{n}{Window}
+        \PY{k+kn}{from} \PY{n+nn}{pyspark}\PY{n+nn}{.}\PY{n+nn}{sql}\PY{n+nn}{.}\PY{n+nn}{functions} \PY{k}{import} \PY{n}{mean} \PY{k}{as} \PY{n}{avg}\PY{p}{,}\PY{n}{stddev} \PY{k}{as} \PY{n}{stdd}
+\end{Verbatim}
+
+    In order to get the sessions of the user, the lags are found from which
+the difference in active time of the user is calculated. This is then
+checked if the user has exceeded 30 minutes are not. If yes, it's
+considered as timed-out session and if no, it's an active session
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{n}{dat\PYZus{}file} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gdrive/My Drive/DDA/Spark1/tags.dat}\PY{l+s+s2}{\PYZdq{}}
+         
+         \PY{n}{df} \PY{o}{=} \PY{n}{sqlContext}\PY{o}{.}\PY{n}{read}\PY{o}{.}\PY{n}{option}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{delimiter}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{csv}\PY{p}{(}\PY{n}{dat\PYZus{}file}\PY{p}{)}
+         \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{selectExpr}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}c0 as UserID}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}c2 as MovieID}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}c4 as Tags}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}c6 as Timestamp}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{UserID}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{UserID}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{cast}\PY{p}{(}\PY{n}{IntegerType}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{MovieID}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{MovieID}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{cast}\PY{p}{(}\PY{n}{IntegerType}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ts\PYZus{}w} \PY{o}{=} \PY{n}{Window}\PY{o}{.}\PY{n}{partitionBy}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{UserID}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{orderBy}\PY{p}{(}\PY{n}{asc}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Timestamp}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lag}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{lag}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{Timestamp}\PY{p}{)}\PY{o}{.}\PY{n}{over}\PY{p}{(}\PY{n}{ts\PYZus{}w}\PY{p}{)}\PY{p}{)}
+         \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{difference}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{when}\PY{p}{(}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{Timestamp} \PY{o}{\PYZhy{}} \PY{n}{df}\PY{o}{.}\PY{n}{lag}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{60} \PY{o}{\PYZlt{}} \PY{l+m+mi}{30}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+                            \PY{o}{.}\PY{n}{otherwise}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+         \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{session}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n+nb}{sum}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{difference}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{over}\PY{p}{(}\PY{n}{ts\PYZus{}w}\PY{p}{)}\PY{p}{)}
+         \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lag}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{difference}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Tagging session for each user: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{df}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{******************************************************}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lag}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{lag}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{Timestamp}\PY{p}{)}\PY{o}{.}\PY{n}{over}\PY{p}{(}\PY{n}{ts\PYZus{}w}\PY{p}{)}\PY{p}{)}
+         \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{difference}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{when}\PY{p}{(}\PY{p}{(}\PY{n}{df}\PY{o}{.}\PY{n}{Timestamp} \PY{o}{\PYZhy{}} \PY{n}{df}\PY{o}{.}\PY{n}{lag}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{30}\PY{o}{*}\PY{l+m+mi}{60}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+                            \PY{o}{.}\PY{n}{otherwise}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+         \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{session}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n+nb}{sum}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{difference}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{over}\PY{p}{(}\PY{n}{ts\PYZus{}w}\PY{p}{)}\PY{p}{)}
+         \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lag}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{difference}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{max\PYZus{}freq} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{groupBy}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{UserID}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{session}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{max\PYZus{}freq} \PY{o}{=} \PY{n}{max\PYZus{}freq}\PY{o}{.}\PY{n}{orderBy}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{max(session)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Frequency of tagging: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{max\PYZus{}freq}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{******************************************************}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{m} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{groupBy}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{UserID}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{session}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{orderBy}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{avg(session)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                          \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Mean and Standard deviation of the tagging frequency of}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{each user: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{sd} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{groupBy}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{UserID}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{n}{stddev}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{session}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{msd} \PY{o}{=} \PY{n}{m}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{sd}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{UserID}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{how}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{right\PYZus{}outer}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{orderBy}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{avg(session)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                                             \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{msd}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{******************************************************}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{mean} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{n}{avg}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{session}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{collect}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{avg(session)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{std} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{n}{stdd}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{session}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{collect}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{stddev\PYZus{}samp(session)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Mean and Standard deviation of the tagging frequency}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{across users: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Mean: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{mean}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Standard Deviation: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{std}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{******************************************************}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{List of users with a mean tagging frequency within two}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{standard }\PY{l+s+se}{\PYZbs{}}
+         \PY{l+s+s2}{      deviation from the mean frequency for across users: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{m} \PY{o}{=} \PY{n}{m}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Flag}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{when}\PY{p}{(}\PY{n}{m}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{avg(session)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{l+m+mi}{2}\PY{o}{*}\PY{n}{std}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{otherwise}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+         \PY{n}{users\PYZus{}list} \PY{o}{=} \PY{n}{m}\PY{o}{.}\PY{n}{filter}\PY{p}{(}\PY{n}{m}\PY{o}{.}\PY{n}{Flag} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{select}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{UserID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{distinct}\PY{p}{(}\PY{p}{)}
+         \PY{n}{users\PYZus{}list}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Tagging session for each user: 
+
++------+-------+----------------+----------+-------+
+|UserID|MovieID|            Tags| Timestamp|session|
++------+-------+----------------+----------+-------+
+|  6658|   2712|     unwatchable|1140486822|      0|
+|  6658|    288|        annoying|1140486947|      1|
+| 10817|    158| Christina Ricci|1218451667|      0|
+| 10817|   3826|     Kevin Bacon|1218452067|      1|
+| 10817|   3826|  elizabeth shue|1218452092|      2|
+| 10817|   7451|   Lindsay Lohan|1218452569|      3|
+| 10817|   1367|      glen close|1218466235|      3|
+| 12046|   1610|        cold war|1222049475|      0|
+| 12046|   1222|     Vietnam War|1222049571|      1|
+| 12046|    750|     dark comedy|1226230439|      1|
+| 12046|    750| Stanley Kubrick|1226230442|      2|
+| 12046|    750|        cold war|1226230454|      3|
+| 12046|    750|          satire|1226230466|      4|
+| 12046|    778|    imdb top 250|1226230555|      5|
+| 12046|    778|    black comedy|1226230582|      6|
+| 12046|  48774|end of the world|1226230975|      7|
+| 12046|  48774|             war|1226230978|      8|
+| 12046|  48774|    imdb top 250|1226230981|      9|
+| 12046|  48774|        dystopia|1226230983|     10|
+| 12046|  48774|      apocalypse|1226230992|     11|
++------+-------+----------------+----------+-------+
+only showing top 20 rows
+
+******************************************************
+
+
+Frequency of tagging: 
+
++------+------------+
+|UserID|max(session)|
++------+------------+
+| 10555|         884|
+| 23172|         476|
+|   146|         332|
+| 33384|         243|
+| 47448|         198|
+| 34745|         143|
+| 11898|         126|
+| 30167|         114|
+| 64633|         107|
+|  8041|         103|
+| 41838|          99|
+|  6362|          94|
+| 23388|          84|
+| 18015|          77|
+| 23032|          72|
+| 49882|          72|
+| 59092|          71|
+| 50970|          70|
+|  2643|          68|
+| 32828|          64|
++------+------------+
+only showing top 20 rows
+
+******************************************************
+
+
+Mean and Standard deviation of the tagging frequency of
+each user: 
+
++------+------------------+--------------------+
+|UserID|      avg(session)|stddev\_samp(session)|
++------+------------------+--------------------+
+| 10555| 520.4491017964071|  226.60815651786262|
+| 23172|233.75731284085276|   143.7536630775717|
+|   146|127.94781553398059|    88.3217936310053|
+| 47448| 90.14512195121951|   66.04907830853023|
+| 11898| 61.71298174442191|   39.88577311890879|
+| 33384| 53.68281938325991|   71.10460757488028|
+| 34745| 52.15585443037975|   42.93201365252578|
+| 64633| 50.52549575070822|   34.70998468723264|
+| 41838|42.367198838896954|  31.872750688848402|
+|  6362|          42.28125|  25.116150339042868|
+| 23388| 37.94854586129754|  26.888318827426215|
+| 50970| 33.81666666666667|  20.285826861639716|
+|  8041| 33.44179104477612|   30.78448433585449|
+| 32828|28.953929539295395|  12.565504107840338|
+| 48621| 28.08076923076923|   16.96206349067229|
+| 19460|            27.875|  15.358259215357908|
+| 49882|27.476462196861625|   16.51963600542648|
+| 24221|  26.5472972972973|  13.190049901325256|
+| 39689| 26.10236220472441|  14.808746153191747|
+| 69388|25.571428571428573|  16.550370366667796|
++------+------------------+--------------------+
+only showing top 20 rows
+
+******************************************************
+
+
+Mean and Standard deviation of the tagging frequency
+across users: 
+
+Mean:  56.551276417660596
+Standard Deviation:  146.6106950491872
+******************************************************
+
+
+List of users with a mean tagging frequency within two
+standard deviation from the mean frequency for across users: 
+
++------+
+|UserID|
++------+
+| 43527|
+| 18979|
+| 24171|
+| 12046|
+| 36538|
+| 53565|
+| 65867|
+| 57380|
+| 10817|
+|  6658|
+| 14570|
+| 15846|
+| 16574|
+| 25462|
+| 26583|
+| 32445|
+| 41946|
+| 47711|
+| 49308|
+| 51123|
++------+
+only showing top 20 rows
+
+
+    \end{Verbatim}
+
+    \hypertarget{section}{%
+\subsubsection{}\label{section}}
+
+    
+
+    \hypertarget{bonus}{%
+\subsubsection{Bonus}\label{bonus}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{n}{movies\PYZus{}dat\PYZus{}file} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gdrive/My Drive/DDA/Spark1/movies.dat}\PY{l+s+s2}{\PYZdq{}}
+        
+        \PY{n}{df\PYZus{}movie} \PY{o}{=} \PY{n}{sqlContext}\PY{o}{.}\PY{n}{read}\PY{o}{.}\PY{n}{option}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{delimiter}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{csv}\PY{p}{(}\PY{n}{movies\PYZus{}dat\PYZus{}file}\PY{p}{)}
+        \PY{n}{df\PYZus{}movie}\PY{o}{=} \PY{n}{df\PYZus{}movie}\PY{o}{.}\PY{n}{selectExpr}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}c0 as MovieID}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}c2 as Title}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}c4 as Genre}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{df\PYZus{}movie}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+        
+        \PY{n}{ratings\PYZus{}dat\PYZus{}file} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gdrive/My Drive/DDA/Spark1/ratings.dat}\PY{l+s+s2}{\PYZdq{}}
+        
+        \PY{n}{df\PYZus{}ratings} \PY{o}{=} \PY{n}{sqlContext}\PY{o}{.}\PY{n}{read}\PY{o}{.}\PY{n}{option}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{delimiter}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{csv}\PY{p}{(}\PY{n}{ratings\PYZus{}dat\PYZus{}file}\PY{p}{)}
+        \PY{n}{df\PYZus{}ratings} \PY{o}{=} \PY{n}{df\PYZus{}ratings}\PY{o}{.}\PY{n}{selectExpr}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}c0 as UserID}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}c2 as MovieID}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                           \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}c4 as Rating}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}c6 as Timestamp}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{df\PYZus{}ratings}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++-------+--------------------+--------------------+
+|MovieID|               Title|               Genre|
++-------+--------------------+--------------------+
+|      1|    Toy Story (1995)|Animation|Childre{\ldots}|
+|      2|      Jumanji (1995)|Adventure|Childre{\ldots}|
+|      3|Grumpier Old Men {\ldots}|      Comedy|Romance|
+|      4|Waiting to Exhale{\ldots}|        Comedy|Drama|
+|      5|Father of the Bri{\ldots}|              Comedy|
+|      6|         Heat (1995)|Action|Crime|Thri{\ldots}|
+|      7|      Sabrina (1995)|      Comedy|Romance|
+|      8| Tom and Huck (1995)|Adventure|Children's|
+|      9| Sudden Death (1995)|              Action|
+|     10|    GoldenEye (1995)|Action|Adventure|{\ldots}|
+|     11|American Presiden{\ldots}|Comedy|Drama|Romance|
+|     12|             Dracula|                null|
+|     13|        Balto (1995)|Animation|Children's|
+|     14|        Nixon (1995)|               Drama|
+|     15|Cutthroat Island {\ldots}|Action|Adventure|{\ldots}|
+|     16|       Casino (1995)|      Drama|Thriller|
+|     17|Sense and Sensibi{\ldots}|       Drama|Romance|
+|     18|   Four Rooms (1995)|            Thriller|
+|     19|         Ace Ventura|                null|
+|     20|  Money Train (1995)|              Action|
++-------+--------------------+--------------------+
+only showing top 20 rows
+
++------+-------+------+---------+
+|UserID|MovieID|Rating|Timestamp|
++------+-------+------+---------+
+|     1|   1193|     5|978300760|
+|     1|    661|     3|978302109|
+|     1|    914|     3|978301968|
+|     1|   3408|     4|978300275|
+|     1|   2355|     5|978824291|
+|     1|   1197|     3|978302268|
+|     1|   1287|     5|978302039|
+|     1|   2804|     5|978300719|
+|     1|    594|     4|978302268|
+|     1|    919|     4|978301368|
+|     1|    595|     5|978824268|
+|     1|    938|     4|978301752|
+|     1|   2398|     4|978302281|
+|     1|   2918|     4|978302124|
+|     1|   1035|     5|978301753|
+|     1|   2791|     4|978302188|
+|     1|   2687|     3|978824268|
+|     1|   2018|     4|978301777|
+|     1|   3105|     5|978301713|
+|     1|   2797|     4|978302039|
++------+-------+------+---------+
+only showing top 20 rows
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{c+c1}{\PYZsh{}Merging both the dataframes}
+        \PY{n}{merged} \PY{o}{=} \PY{n}{df\PYZus{}movie}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{df\PYZus{}ratings}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MovieID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{inner}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{merged}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++-------+--------------------+--------------------+------+------+---------+
+|MovieID|               Title|               Genre|UserID|Rating|Timestamp|
++-------+--------------------+--------------------+------+------+---------+
+|   1193|One Flew Over the{\ldots}|               Drama|     1|     5|978300760|
+|    661|James and the Gia{\ldots}|Animation|Childre{\ldots}|     1|     3|978302109|
+|    914| My Fair Lady (1964)|     Musical|Romance|     1|     3|978301968|
+|   3408|Erin Brockovich ({\ldots}|               Drama|     1|     4|978300275|
+|   2355|Bug's Life, A (1998)|Animation|Childre{\ldots}|     1|     5|978824291|
+|   1197|Princess Bride, T{\ldots}|Action|Adventure|{\ldots}|     1|     3|978302268|
+|   1287|      Ben-Hur (1959)|Action|Adventure|{\ldots}|     1|     5|978302039|
+|   2804|Christmas Story, {\ldots}|        Comedy|Drama|     1|     5|978300719|
+|    594|Snow White and th{\ldots}|Animation|Childre{\ldots}|     1|     4|978302268|
+|    919|Wizard of Oz, The{\ldots}|Adventure|Childre{\ldots}|     1|     4|978301368|
+|    595|Beauty and the Be{\ldots}|Animation|Childre{\ldots}|     1|     5|978824268|
+|    938|         Gigi (1958)|             Musical|     1|     4|978301752|
+|   2398|Miracle on 34th S{\ldots}|               Drama|     1|     4|978302281|
+|   2918|Ferris Bueller's {\ldots}|              Comedy|     1|     4|978302124|
+|   1035|Sound of Music, T{\ldots}|             Musical|     1|     5|978301753|
+|   2791|    Airplane! (1980)|              Comedy|     1|     4|978302188|
+|   2687|       Tarzan (1999)|Animation|Children's|     1|     3|978824268|
+|   2018|        Bambi (1942)|Animation|Children's|     1|     4|978301777|
+|   3105|   Awakenings (1990)|               Drama|     1|     5|978301713|
+|   2797|          Big (1988)|      Comedy|Fantasy|     1|     4|978302039|
++-------+--------------------+--------------------+------+------+---------+
+only showing top 20 rows
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{n}{columns\PYZus{}to\PYZus{}drop} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MovieID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Genre}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{UserID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Timestamp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{test} \PY{o}{=} \PY{n}{merged}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{o}{*}\PY{n}{columns\PYZus{}to\PYZus{}drop}\PY{p}{)}
+        \PY{n}{test}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++--------------------+------+
+|               Title|Rating|
++--------------------+------+
+|One Flew Over the{\ldots}|     5|
+|James and the Gia{\ldots}|     3|
+| My Fair Lady (1964)|     3|
+|Erin Brockovich ({\ldots}|     4|
+|Bug's Life, A (1998)|     5|
+|Princess Bride, T{\ldots}|     3|
+|      Ben-Hur (1959)|     5|
+|Christmas Story, {\ldots}|     5|
+|Snow White and th{\ldots}|     4|
+|Wizard of Oz, The{\ldots}|     4|
+|Beauty and the Be{\ldots}|     5|
+|         Gigi (1958)|     4|
+|Miracle on 34th S{\ldots}|     4|
+|Ferris Bueller's {\ldots}|     4|
+|Sound of Music, T{\ldots}|     5|
+|    Airplane! (1980)|     4|
+|       Tarzan (1999)|     3|
+|        Bambi (1942)|     4|
+|   Awakenings (1990)|     5|
+|          Big (1988)|     4|
++--------------------+------+
+only showing top 20 rows
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{n}{test} \PY{o}{=} \PY{n}{test}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Rating}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{test}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Rating}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{cast}\PY{p}{(}\PY{n}{IntegerType}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        \PY{n}{a} \PY{o}{=} \PY{n}{test}\PY{o}{.}\PY{n}{rdd}\PY{o}{.}\PY{n}{groupByKey}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{mapValues}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+        \PY{n}{c} \PY{o}{=} \PY{n}{sqlContext}\PY{o}{.}\PY{n}{createDataFrame}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{o}{.}\PY{n}{orderBy}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{ascending} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}
+        \PY{n}{c} \PY{o}{=} \PY{n}{c}\PY{o}{.}\PY{n}{filter}\PY{p}{(}\PY{n}{c}\PY{o}{.}\PY{n}{\PYZus{}2} \PY{o}{==} \PY{l+m+mf}{5.0}\PY{p}{)}
+        \PY{n}{c} \PY{o}{=} \PY{n}{c}\PY{o}{.}\PY{n}{selectExpr}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}1 as MovieID}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}2 as Avg\PYZus{}Rating}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Movies with maximum average rating: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{c}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Movies with maximum average rating: 
+
++--------------------+----------+
+|             MovieID|Avg\_Rating|
++--------------------+----------+
+|Gate of Heavenly {\ldots}|       5.0|
+|Smashing Time (1967)|       5.0|
+|        Lured (1947)|       5.0|
+|One Little Indian{\ldots}|       5.0|
+|    Baby, The (1973)|       5.0|
+|Schlafes Bruder ({\ldots}|       5.0|
+|Follow the Bitch {\ldots}|       5.0|
+|Bittersweet Motel{\ldots}|       5.0|
+|Ulysses (Ulisse) {\ldots}|       5.0|
+|Song of Freedom ({\ldots}|       5.0|
++--------------------+----------+
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{n}{columns\PYZus{}to\PYZus{}drop} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MovieID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Title}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{UserID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Timestamp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{test} \PY{o}{=} \PY{n}{merged}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{o}{*}\PY{n}{columns\PYZus{}to\PYZus{}drop}\PY{p}{)}
+        \PY{n}{test}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+        
+        \PY{n}{test} \PY{o}{=} \PY{n}{test}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Rating}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{test}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Rating}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{cast}\PY{p}{(}\PY{n}{IntegerType}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++--------------------+------+
+|               Genre|Rating|
++--------------------+------+
+|               Drama|     5|
+|Animation|Childre{\ldots}|     3|
+|     Musical|Romance|     3|
+|               Drama|     4|
+|Animation|Childre{\ldots}|     5|
+|Action|Adventure|{\ldots}|     3|
+|Action|Adventure|{\ldots}|     5|
+|        Comedy|Drama|     5|
+|Animation|Childre{\ldots}|     4|
+|Adventure|Childre{\ldots}|     4|
+|Animation|Childre{\ldots}|     5|
+|             Musical|     4|
+|               Drama|     4|
+|              Comedy|     4|
+|             Musical|     5|
+|              Comedy|     4|
+|Animation|Children's|     3|
+|Animation|Children's|     4|
+|               Drama|     5|
+|      Comedy|Fantasy|     4|
++--------------------+------+
+only showing top 20 rows
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{n}{a} \PY{o}{=} \PY{n}{test}\PY{o}{.}\PY{n}{rdd}\PY{o}{.}\PY{n}{groupByKey}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{mapValues}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+        \PY{n}{c} \PY{o}{=} \PY{n}{sqlContext}\PY{o}{.}\PY{n}{createDataFrame}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{o}{.}\PY{n}{orderBy}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{ascending} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}
+        \PY{n}{c} \PY{o}{=} \PY{n}{c}\PY{o}{.}\PY{n}{selectExpr}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}1 as Genre}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}2 as Avg\PYZus{}Rating}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{c}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+        \PY{n}{maxx} \PY{o}{=} \PY{n}{c}\PY{o}{.}\PY{n}{rdd}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{key}\PY{o}{=}\PY{k}{lambda} \PY{n}{x}\PY{p}{:}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Genre with maximum average rating: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{maxx}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++--------------------+------------------+
+|               Genre|        Avg\_Rating|
++--------------------+------------------+
+|Animation|Comedy|{\ldots}| 4.473837209302325|
+|   Film-Noir|Mystery| 4.367424242424242|
+|       Adventure|War|  4.34610705596107|
+|Film-Noir|Romance{\ldots}|  4.29438202247191|
+|    Film-Noir|Sci-Fi| 4.273333333333333|
+|     Crime|Film-Noir| 4.264129181084199|
+|           Film-Noir| 4.258104738154613|
+|Action|Adventure|{\ldots}| 4.251655629139073|
+|Adventure|Childre{\ldots}| 4.247962747380675|
+|     Drama|Film-Noir| 4.218152866242038|
+|  Film-Noir|Thriller| 4.206757438224912|
+|Crime|Film-Noir|M{\ldots}|4.2020547945205475|
+|Comedy|Mystery|Ro{\ldots}| 4.184158415841584|
+|Comedy|Drama|Musical| 4.179785330948121|
+|Comedy|Mystery|Th{\ldots}| 4.168154761904762|
+|  Action|Crime|Drama| 4.151277918489523|
+|Action|Adventure|{\ldots}| 4.147826086956521|
+|Comedy|Drama|Western| 4.141263940520446|
+|Crime|Film-Noir|M{\ldots}| 4.126734158230221|
+|Action|Sci-Fi|Thr{\ldots}| 4.125824175824176|
++--------------------+------------------+
+only showing top 20 rows
+
+Genre with maximum average rating: 
+ Row(Genre='Animation|Comedy|Thriller', Avg\_Rating=4.473837209302325)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{n}{u\PYZus{}rat} \PY{o}{=} \PY{n}{merged}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{UserID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{agg}\PY{p}{(}\PY{n}{countDistinct}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{MovieID}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+        \PY{n}{u\PYZus{}rat} \PY{o}{=} \PY{n}{u\PYZus{}rat}\PY{o}{.}\PY{n}{filter}\PY{p}{(}\PY{n}{u\PYZus{}rat}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count(DISTINCT MovieID)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{40}\PY{p}{)}
+        \PY{n}{merged} \PY{o}{=} \PY{n}{merged}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{u\PYZus{}rat}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{UserID}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{inner}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{columns\PYZus{}to\PYZus{}drop} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MovieID}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Title}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Genre}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count(DISTINCT MovieID)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                           \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Timestamp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{test} \PY{o}{=} \PY{n}{merged}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{o}{*}\PY{n}{columns\PYZus{}to\PYZus{}drop}\PY{p}{)}
+        \PY{n}{test}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++------+------+
+|UserID|Rating|
++------+------+
+|  1090|     3|
+|  1090|     3|
+|  1090|     4|
+|  1090|     3|
+|  1090|     4|
+|  1090|     4|
+|  1090|     3|
+|  1090|     3|
+|  1090|     4|
+|  1090|     3|
+|  1090|     3|
+|  1090|     3|
+|  1090|     4|
+|  1090|     2|
+|  1090|     4|
+|  1090|     2|
+|  1090|     3|
+|  1090|     4|
+|  1090|     3|
+|  1090|     3|
++------+------+
+only showing top 20 rows
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}0}]:} \PY{n}{test} \PY{o}{=} \PY{n}{test}\PY{o}{.}\PY{n}{withColumn}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Rating}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{test}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Rating}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{cast}\PY{p}{(}\PY{n}{IntegerType}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        \PY{n}{a} \PY{o}{=} \PY{n}{test}\PY{o}{.}\PY{n}{rdd}\PY{o}{.}\PY{n}{groupByKey}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{mapValues}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n+nb}{sum}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{o}{/} \PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+        \PY{n}{c} \PY{o}{=} \PY{n}{sqlContext}\PY{o}{.}\PY{n}{createDataFrame}\PY{p}{(}\PY{n}{a}\PY{p}{)}\PY{o}{.}\PY{n}{orderBy}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{ascending} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+        \PY{n}{c} \PY{o}{=} \PY{n}{c}\PY{o}{.}\PY{n}{selectExpr}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}1 as UserID}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}2 as Avg\PYZus{}Rating}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{c}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+        \PY{n}{minn} \PY{o}{=} \PY{n}{c}\PY{o}{.}\PY{n}{rdd}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{n}{key}\PY{o}{=}\PY{k}{lambda} \PY{n}{x}\PY{p}{:}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{User with minimum average rating: }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{minn}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
++------+------------------+
+|UserID|        Avg\_Rating|
++------+------------------+
+|  3598|1.0153846153846153|
+|  4486|1.0588235294117647|
+|  2744|1.3043478260869565|
+|  4539| 1.815126050420168|
+|  5850|1.8448275862068966|
+|  5334|1.9272727272727272|
+|  5686|2.0452830188679245|
+|  3209|2.0608695652173914|
+|  1608|2.0833333333333335|
+|  4575|             2.088|
+|  4916| 2.088235294117647|
+|  1747| 2.138888888888889|
+|  1761|  2.15929203539823|
+|  1340|2.1627329192546583|
+|   163|2.1828793774319064|
+|  1100|2.1988188976377954|
+|  5039| 2.202777777777778|
+|  2106|2.2455555555555557|
+|  1630| 2.264957264957265|
+|   203|2.2913385826771653|
++------+------------------+
+only showing top 20 rows
+
+User with minimum average rating: 
+ Row(UserID='3598', Avg\_Rating=1.0153846153846153)
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
